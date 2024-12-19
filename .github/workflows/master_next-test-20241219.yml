@@ -25,7 +25,15 @@ jobs:
         run: |
           npm install
           npm run build
-
+          
+      - name: Prepare standalone build
+        run: |
+          # Ensure standalone .next directory exists
+          mkdir -p .next/standalone/.next
+          # Copy necessary files
+          cp -r .next/static .next/standalone/.next/
+          cp -r public .next/standalone/
+          
       - name: Zip artifact for deployment
         run: |
           cd .next/standalone
